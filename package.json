@@ -9,7 +9,9 @@
   "dependencies": {
     "actionhero": "9.4.1",
     "grunt": "latest",
+    "mikronode": "^0.3.3",
     "native-dns": "0.7.0",
+    "node-dhcpd": "git+https://github.com/konobi/node-dhcpd",
     "ws": "latest"
   },
   "devDependencies": {
