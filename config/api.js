@@ -51,7 +51,9 @@ exports.default = {
         // format is {roomName: {authKey, authValue}}
         //'secureRoom': {authorized: true},
         'defaultRoom': {}
-      }
+      },
+      
+      action_timeout:10*1000
     }
   }
 }
