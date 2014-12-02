@@ -6,7 +6,7 @@ exports.dns_server = function(api, next){
     put_record:function(name,address,type,ttl,callback,auto_ptr){
       if(auto_ptr && type == "A"){
         var ptr=api.dns.get_ptr_from_a(address);
-        api.cache.save(name,{name:ptr,address:name,type:"PTR",ttl:ttl},ttl*1000,function(error,is_new){
+        api.cache.save(ptr,{name:ptr,data:name,type:"PTR",ttl:ttl},ttl*1000,function(error,is_new){
           if(error === null){
             api.cache.save(name,{name:name,address:address,type:type,ttl:ttl,auto_ptr:auto_ptr},ttl*1000,callback)
           }else{
@@ -49,7 +49,7 @@ exports.dns_server = function(api, next){
     
     var server = dns.createServer();
     server.on('request', function (request, response) {
-      api.log("Serving request ",0,request.question[0].name);
+      api.log("Serving request ","info",request.question[0]);
       
       api.dns.get_record(request.question[0].name,function(value){
         var answer = null;
