@@ -5,7 +5,50 @@ exports.action = {
   name:                   'ros',
   description:            'ros',
   blockedConnectionTypes: [],
-  outputExample:          {},
+  outputExample:          
+    [
+       {
+        ".id": "*2A5C",
+        "address": "192.168.6.95",
+        "mac-address": "B8:88:E3:39:EF:E6",
+        "client-id": "1:b8:88:e3:39:ef:e6",
+        "server": "User",
+        "always-broadcast": "true",
+        "status": "bound",
+        "expires-after": "14:40:26",
+        "last-seen": "8h19m34s",
+        "active-address": "192.168.6.95",
+        "active-mac-address": "B8:88:E3:39:EF:E6",
+        "active-client-id": "1:b8:88:e3:39:ef:e6",
+        "active-server": "User",
+        "host-name": "cc-PC",
+        "radius": "false",
+        "dynamic": "true",
+        "blocked": "false",
+        "disabled": "false"
+      },
+      {
+        ".id": "*2A5D",
+        "address": "192.168.6.94",
+        "mac-address": "28:D2:44:68:2C:5E",
+        "client-id": "1:28:d2:44:68:2c:5e",
+        "server": "User",
+        "status": "bound",
+        "expires-after": "06:36:57",
+        "last-seen": "7h20m10s",
+        "active-address": "192.168.6.94",
+        "active-mac-address": "28:D2:44:68:2C:5E",
+        "active-client-id": "1:28:d2:44:68:2c:5e",
+        "active-server": "User",
+        "host-name": "HuangPC",
+        "radius": "false",
+        "dynamic": "true",
+        "blocked": "false",
+        "disabled": "false"
+      }
+    ]
+    
+  ,
   matchExtensionMimeType: false,
   version:                1.0,
   toDocument:             true,

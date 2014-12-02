@@ -2,7 +2,7 @@ exports.default = {
   general: function(api){
     return {
       apiVersion: '0.0.1',
-      serverName: 'actionhero API',
+      serverName: 'RIADEV 3DN',
       // id can be set here, or it will be generated dynamically.
       //  Be sure that every server you run has a unique ID (which will happen when generated dynamically)
       //  id: 'myActionHeroServer',
@@ -52,8 +52,9 @@ exports.default = {
         //'secureRoom': {authorized: true},
         'defaultRoom': {}
       },
+      //dnsport:8353,
+      action_timeout:10*1000,
       
-      action_timeout:10*1000
     }
   }
 }
