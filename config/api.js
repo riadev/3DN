@@ -2,18 +2,18 @@ exports.default = {
   general: function(api){
     return {
       apiVersion: '0.0.1',
-      serverName: 'RIADEV 3DN',
+      serverName: process.env.SERVER_NAME||"3DN DNS SERVER",
       // id can be set here, or it will be generated dynamically.
       //  Be sure that every server you run has a unique ID (which will happen when generated dynamically)
       //  id: 'myActionHeroServer',
       // A unique token to your application that servers will use to authenticate to each other
-      serverToken: 'change-me',
+      serverToken: 'yPoasdKsPR2sE3puBd',
       // The welcome message seen by TCP and webSocket clients upon connection
-      welcomeMessage: 'Hello! Welcome to the actionhero api',
+      welcomeMessage: 'Welcome to 3DN DNS API Server',
       // the redis prefix for actionhero's cache objects
-      cachePrefix: 'actionhero:cache:',
+      cachePrefix: '3dn:cache:',
       // the redis prefix for actionhero's cache/lock objects
-      lockPrefix: 'actionhero:lock:',
+      lockPrefix: '3dn:lock:',
       // how long will a lock last before it exipres (ms)?
       lockDuration: 1000 * 10, // 10 seconds
       // Watch for changes in actions and tasks, and reload/restart them on the fly
@@ -52,7 +52,7 @@ exports.default = {
         //'secureRoom': {authorized: true},
         'defaultRoom': {}
       },
-      //dnsport:8353,
+      dnsport:53,
       action_timeout:10*1000,
       
     }

@@ -75,7 +75,7 @@ exports.dns_server = function(api, next){
     server.on('error', function (err, buff, req, res) {
       api.log(err.stack,"error");
     });
-    var binding_port=api.config.general.dnsport||53;
+    var binding_port=process.env.DNS_PORT||api.config.general.dnsport;
     api.log("Binding on port "+ binding_port );
     server.serve(binding_port,(process.env.IP || '0.0.0.0'));
 

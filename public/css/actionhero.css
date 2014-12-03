@@ -1,5 +1,5 @@
 body {
-  background-color: #04819E;
+  background-color: #716C74;
   text-align: center;
   font-family: sans-serif;
   color: black;
@@ -8,11 +8,11 @@ body {
 .body_container {
   margin:0 auto;
   width: 800px;
-  background-color: #FFB100;
-  border-radius: 15px;
+  background-color: #888597;
+  border-radius: 5px;
   margin-top: 20px;
   padding-bottom: 20px;
-  border: 5px solid #015367;
+  border: 5px solid #16C73;
 }
 
 h1 {
@@ -20,7 +20,7 @@ h1 {
   font-weight: 800; 
   font-size: 50px;
   text-shadow: 4px 4px #A61300;
-  color: #FF1E00;
+  color: #4C4D5F;
 }
 
 .server_info {
@@ -28,7 +28,7 @@ h1 {
 }
 
 .box{
-  border: 1px solid black;
+  border: 1px solid #716C74 ;
   clear: both;
 }
 

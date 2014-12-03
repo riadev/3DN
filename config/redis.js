@@ -49,3 +49,31 @@ exports.test = {
     }
   }
 }
+
+exports.production = { 
+  redis: function(api){
+    return {
+      // Which channel to use on redis pub/sub for RPC communication
+      channel: 'actionhero',
+      // How long to wait for an RPC call before considering it a failure 
+      rpcTimeout: 5000, 
+
+      
+      package: 'redis',
+      host: process.env.REDIS_HOST || '127.0.0.1',
+      port: process.env.REDIS_PORT||6379,
+      password:process.env.REDIS_PASSWD|| null,
+      options: process.env.REDIS_OPS||null,
+      database: 0
+
+      // package: 'redis-sentinel-client',
+      // port: 26379,
+      // host: '127.0.0.1',
+      // database: 0,
+      // options: {
+      //   master_auth_pass: null,
+      //   masterName: 'BUS',
+      // }
+    }
+  }
+}
