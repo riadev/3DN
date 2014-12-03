@@ -10,7 +10,7 @@ This currently support http restful api to update DNS record (a docker api clien
 #Installation
 Server is wirtten in NODEJS. 
 
-1. get source or git clone it
+1. git clone git@github.com:riadev/3DN.git
 2. run`npm install`
 
 #Configuration
