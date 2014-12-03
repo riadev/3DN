@@ -22,6 +22,11 @@ Server is wirtten in NODEJS.
 5. `ROS_USER`: RouterOS's API Username, default *admin*
 6. `ROS_PASSWD`:RouterOS's API Password, default *password*
 7. `SERVER_NAME`:Display purpose Server name, default value is 
+8. `NODE_EVN`: Which mode you are running in, values can be production or test . if you do not specify this, it will be running in dev mode. Notice, if you do specify this to production, you need to have redis server avaiable and configure it 
+9. `REDIS_HOST`: Only needed when NODE_EVN is production, host of redis server, default localhost
+10. `REDIS_PORT`: Only needed when NODE_EVN is production, default 6379
+11. `REDIS_OPS`: Only needed when NODE_EVN is production,default null
+12. `REDIS_PASSWD`:Only needed when NODE_EVN is production, default null
 
 #RUN
 2. to simiply play with it  `npm start` or `node_modules/.bin/actionhero `
