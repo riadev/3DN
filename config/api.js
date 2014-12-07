@@ -52,8 +52,7 @@ exports.default = {
         //'secureRoom': {authorized: true},
         'defaultRoom': {}
       },
-      dnsport:53,
-      action_timeout:10*1000,
+      logging_level:'debug'
       
     }
   }
@@ -74,7 +73,7 @@ exports.test = {
         'defaultRoom': {},
         'otherRoom': {},
         'secureRoom': {authorized: true}
-      },
+      }
     }
   }
 }
@@ -82,7 +81,8 @@ exports.test = {
 exports.production = { 
   general: function(api){
     return {  
-      developmentMode: false
+      developmentMode: false,
+      logging_level:'info'
     }
   }
 }

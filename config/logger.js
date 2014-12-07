@@ -11,7 +11,7 @@ exports.default = {
         return new (winston.transports.Console)({
           colorize: true,
           // level: 'debug',
-          level: 'info',
+          level: api.config.general.logging_level,
           timestamp: api.utils.sqlDateTime
         });
       });
@@ -26,7 +26,7 @@ exports.default = {
     logger.transports.push(function(api, winston) {
       return new (winston.transports.File)({
         filename: api.config.general.paths.log[0] + '/' + api.pids.title + '.log',
-        level: 'info',
+        level: api.config.general.logging_level,
         timestamp: true
       });
     });
