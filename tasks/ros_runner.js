@@ -7,7 +7,7 @@ exports.task = {
   pluginOptions: {},
   
   run: function(api, params, next){
-    if(process.env.ROS_TASK == "true" || process.env.ROS_HOST!=null ){
+    if(process.env.ROS_TASK == "true" ){
       if(params == null){ params = {} }
 
       var task_connection = new api.connection({
