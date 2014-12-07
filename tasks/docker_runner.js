@@ -24,7 +24,7 @@ exports.task = {
             var id =  containerInfo.Id;
             var container = docker.getContainer(id);
             container.inspect(function(error,container_data){
-              var domain_base=container_data.Config.Domainname;
+              var domain_base=container_data.Config.Domainname||process.env.BASE_DOMAIN;
               var host=container_data.Config.Hostname;
               var ip=container_data.NetworkSettings.IPAddress;
               var record={name:host+"."+domain_base,address:ip, type:"A",ttl:10,auto_ptr:true}
