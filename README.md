@@ -46,3 +46,6 @@ Server is wirtten in NODEJS.
 
 #Resful API
 Documented at the index.html page. run the server and detailed documentation on API are shown there.
+
+#TODO
+Finish docker file
