@@ -2,7 +2,7 @@ exports.task = {
   name:          'ros_runner',
   description:   'ros_runner',
   frequency:     10*1000,
-  queue:         'default',
+  queue:         'ros',
   plugins:       [],
   pluginOptions: {},
   

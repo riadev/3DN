@@ -1,12 +1,10 @@
 var Docker = require('dockerode');
-yaml = require('js-yaml');
-fs   = require('fs');
 
 exports.task = {
   name:          'docker_runner',
   description:   'docker_runner',
   frequency:     10*1000,
-  queue:         'default',
+  queue:         'docker',
   plugins:       [],
   pluginOptions: {},
   
