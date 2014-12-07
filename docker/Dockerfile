@@ -11,7 +11,7 @@ ENV NODE_ENV production
 ENV ROS_HOST 192.168.1.1
 ENV ROS_USER ros
 ENV ROS_PASSWD passwd
-ENV ACTIONHERO_CONFIG=/opt/riadns/config
+ENV ACTIONHERO_CONFIG /opt/riadns/config
 
 VOLUME ["/var/lib/redis"]
 
