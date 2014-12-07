@@ -126,7 +126,7 @@ exports.ros_dhcp_sync = {
     run_ros_cmd(function(value){
       add_record(value);  
     },"/ip/dhcp-server/lease/print",api)
-    
+    var counter=0;
     var add_record=function(records){
       if(records.length>0){
         var record = records.pop();
@@ -135,6 +135,7 @@ exports.ros_dhcp_sync = {
           add_record(records);
           return;
         }
+        counter++;
         var name= record["host-name"].toLowerCase()+"."+record["server"].toLowerCase()+"."+base_domain.toLowerCase();
         var address= record["address"] || record["active-address"];
         var type= "A";
@@ -145,6 +146,7 @@ exports.ros_dhcp_sync = {
           add_record(records);
         },auto_ptr);
       }else{
+        api.log("processed "+counter +" record","info")
         next(connection, true);
       }
       

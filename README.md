@@ -27,6 +27,7 @@ Server is wirtten in NODEJS.
 10. `REDIS_PORT`: Only needed when NODE_EVN is production, default 6379
 11. `REDIS_OPS`: Only needed when NODE_EVN is production,default null
 12. `REDIS_PASSWD`:Only needed when NODE_EVN is production, default null
+13. `SCHEDULE_TASK`: true or false to indicate wether to enable internal schduler to pull docker and dhcp server
 
 #RUN
 2. to simiply play with it  `npm start` or `node_modules/.bin/actionhero `
