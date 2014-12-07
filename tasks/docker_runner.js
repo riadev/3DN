@@ -20,7 +20,7 @@ exports.task = {
         docker.listContainers(function (err, containers) {
           if(containers!=null){
             containers.forEach(function (containerInfo) {
-              api.log("container:","info",containerInfo)
+              api.log("container:","debug",containerInfo)
 
               var id =  containerInfo.Id;
               var container = docker.getContainer(id);
