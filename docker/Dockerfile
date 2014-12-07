@@ -11,6 +11,7 @@ ENV NODE_ENV production
 ENV ROS_HOST 192.168.1.1
 ENV ROS_USER ros
 ENV ROS_PASSWD passwd
+ENV ACTIONHERO_CONFIG=/opt/riadns/config
 
 VOLUME ["/var/lib/redis"]
 
@@ -20,16 +21,16 @@ RUN apt-get install -y --force-yes  redis-server
 
 RUN npm install -g npm@latest
 RUN npm install -g forever
-RUN git help -a
-RUN git clone https://github.com/riadev/3DN.git
-RUN mv 3DN /opt/3dn
-RUN npm install /opt/3dn
-RUN chmod +x /opt/3dn/docker/run.sh
-RUN chmod +x /opt/3dn/*.js
+RUN npm install riadns
+RUN mv /data/node_modules/riadns/ /opt/riadns
+RUN mkdir -p  /opt/riadns/log/
+
+RUN chmod +x /opt/riadns/docker/run.sh
+RUN chmod +x /opt/riadns/*.js
 
 EXPOSE 8353
 EXPOSE 53
 EXPOSE 8080
 EXPOSE 80
 
-CMD ["/opt/3dn/docker/run.sh"]
+CMD ["/opt/riadns/docker/run.sh"]
