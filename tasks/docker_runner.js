@@ -18,22 +18,24 @@ exports.task = {
        var server_info=host.split(":");
        var docker = new Docker({host: server_info[0], port: server_info[1]});
         docker.listContainers(function (err, containers) {
-          containers.forEach(function (containerInfo) {
-            api.log("container:","debug",containerInfo)
+          if(containers!=null){
+            containers.forEach(function (containerInfo) {
+              api.log("container:","info",containerInfo)
 
-            var id =  containerInfo.Id;
-            var container = docker.getContainer(id);
-            container.inspect(function(error,container_data){
-              var domain_base=container_data.Config.Domainname||process.env.BASE_DOMAIN;
-              var host=container_data.Config.Hostname;
-              var ip=container_data.NetworkSettings.IPAddress;
-              var record={name:host+"."+domain_base,address:ip, type:"A",ttl:10,auto_ptr:true}
-              api.dns.put_record(record.name,record.address,record.type,record.ttl,function(error,is_new){
-                if(error === null )api.log("put dns record for docker:","debug",record)
-              },record.auto_ptr);
-            })
+              var id =  containerInfo.Id;
+              var container = docker.getContainer(id);
+              container.inspect(function(error,container_data){
+                var domain_base=container_data.Config.Domainname||process.env.BASE_DOMAIN;
+                var host=container_data.Config.Hostname;
+                var ip=container_data.NetworkSettings.IPAddress;
+                var record={name:host+"."+domain_base,address:ip, type:"A",ttl:10,auto_ptr:true}
+                api.dns.put_record(record.name,record.address,record.type,record.ttl,function(error,is_new){
+                  if(error === null )api.log("put dns record for docker:","debug",record)
+                },record.auto_ptr);
+              })
 
-          });
+            });
+          }
           if(hosts.length>0)
             add_record(hosts.pop());
           else
