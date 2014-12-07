@@ -11,10 +11,17 @@ This currently support http restful api to update DNS record (a docker api clien
 Server is wirtten in NODEJS. 
 
 1. `git clone git@github.com:riadev/3DN.git`
-2. run`npm install`
+2. run `npm install`
 
 #Configuration
- 
+ Configuration is done through setting up envirment variables . simply run program with below bash statement as an example
+
+ `EXPORT IP=192.168.1.2`
+
+ `EXPORT PORT=80`
+
+  check RUN section to see how you can run with
+
 1. `IP` : This is the IP address the restful api http server and DNS server should be binded to. normally it should be *0.0.0.0* . but if you do want it to only listen to one interface, you would specify the IP address
 2. `PORT`: HTTP Restful API TCP Port to listen on, defaut is *8080*
 3. `DNS_PORT`: DNS UDP port to listen on, default is *53*
@@ -30,8 +37,8 @@ Server is wirtten in NODEJS.
 13. `SCHEDULE_TASK`: true or false to indicate wether to enable internal schduler to pull docker and dhcp server
 
 #RUN
-2. to simiply play with it  `npm start` or `node_modules/.bin/actionhero `
-3. If you want to run it in background, use install forever(`sudo npm install -g forever`) 
+2. To simiply play with it  `npm start` or `node_modules/.bin/actionhero `
+3. If you want to run it in background, install forever tool (`sudo npm install -g forever`)
 	1. run `forever start node_modules/.bin/actionhero` 
 	2. to check logs `forever logs 0` (assuming you are running this app only)
 	3. `forever list` and `forever stop {index}` to stop other from running 

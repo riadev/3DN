@@ -50,7 +50,7 @@ exports.default = {
       startingChatRooms: {
         // format is {roomName: {authKey, authValue}}
         //'secureRoom': {authorized: true},
-        'defaultRoom': {}
+        //'defaultRoom': {}
       },
       logging_level:'debug'
       

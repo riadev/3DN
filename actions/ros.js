@@ -124,15 +124,15 @@ exports.ros_dhcp_sync = {
     connection.response=[];
     
     run_ros_cmd(function(value){
-      add_record(value);  
+      next_record(value);
     },"/ip/dhcp-server/lease/print",api)
     var counter=0;
-    var add_record=function(records){
+    var next_record=function(records){
       if(records.length>0){
         var record = records.pop();
         if(record["host-name"] === null || record["host-name"] === undefined){
           //skip adding and jump to next
-          add_record(records);
+          next_record(records);
           return;
         }
         counter++;
@@ -143,7 +143,7 @@ exports.ros_dhcp_sync = {
         var auto_ptr=true;
         api.dns.put_record(name,address,type,ttl,function(error,is_new){
           if(error === null )connection.response.push({name:name,address:address,type:type,ttl:ttl,is_new:is_new});
-          add_record(records);
+          next_record(records);
         },auto_ptr);
       }else{
         api.log("processed "+counter +" record","info")
