@@ -3,7 +3,7 @@ var Docker = require('dockerode');
 exports.task = {
   name:          'docker_runner',
   description:   'docker_runner',
-  frequency:     10*1000,
+  frequency:     5*1000,
   queue:         'docker',
   plugins:       [],
   pluginOptions: {},
@@ -28,7 +28,7 @@ exports.task = {
                 var domain_base=container_data.Config.Domainname||process.env.BASE_DOMAIN;
                 var host=container_data.Config.Hostname;
                 var ip=container_data.NetworkSettings.IPAddress;
-                var record={name:host+"."+domain_base,address:ip, type:"A",ttl:10,auto_ptr:true}
+                var record={name:host+"."+domain_base,address:ip, type:"A",ttl:30,auto_ptr:true}
                 api.dns.put_record(record.name,record.address,record.type,record.ttl,function(error,is_new){
                   if(error === null )api.log("put dns record for docker:","debug",record)
                 },record.auto_ptr);
