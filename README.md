@@ -25,6 +25,7 @@ Server is wirtten in NODEJS.
 1. `IP` : This is the IP address the restful api http server and DNS server should be binded to. normally it should be *0.0.0.0* . but if you do want it to only listen to one interface, you would specify the IP address
 2. `PORT`: HTTP Restful API TCP Port to listen on, defaut is *8080*
 3. `DNS_PORT`: DNS UDP port to listen on, default is *53*
+14. `ROS_TASK`: true or false to enable the routeros pulling job to poll from routeros's dhcp lease list(Note, with debian sqeeze machines, they don't register their hostname , you will have to apply some trick [http://jeffwelling.github.io/2010/01/02/Debian-dynamic-dns.html])
 4. `ROS_HOST`: RouterOS's IP Addresss or hostname. default *localhost*
 5. `ROS_USER`: RouterOS's API Username, default *admin*
 6. `ROS_PASSWD`:RouterOS's API Password, default *password*
@@ -34,8 +35,7 @@ Server is wirtten in NODEJS.
 10. `REDIS_PORT`: Only needed when NODE_EVN is production, default 6379
 11. `REDIS_OPS`: Only needed when NODE_EVN is production,default null
 12. `REDIS_PASSWD`:Only needed when NODE_EVN is production, default null
-13. `SCHEDULE_TASK`: true or false to indicate wether to enable internal schduler to pull docker and dhcp server
-
+13. `SCHEDULE_TASK`: true or false to indicate whether to enable internal scheduler to pull docker and dhcp server
 #RUN
 2. To simiply play with it  `npm start` or `node_modules/.bin/actionhero `
 3. If you want to run it in background, install forever tool (`sudo npm install -g forever`)
@@ -47,5 +47,51 @@ Server is wirtten in NODEJS.
 #Resful API
 Documented at the index.html page. run the server and detailed documentation on API are shown there.
 
-#TODO
-Finish docker file
+#Run with docker
+```
+docker run -d -p 80:8080 -p 53:8353/udp  --name=riadns --privileged=true --hostname=ns.yourdomain.net
+ -e "BASE_DOMAIN=yourdomain.net"
+ -e "DOCKER_HOSTS=docker1:4243,docker2:4243,docker3:4243"
+ -e "DNS_PORT=8353"
+ -e SCHEDULE_TASK=true
+ -e IP="0.0.0.0"
+ riadev/riadns
+ ```
+
+Now try
+`
+curl http://your_server.com/api/set_dns?apiVersion=1&name=test.domain.com&address=192.168.1.1&type=A&ttl=60
+`
+
+You should see json return
+```
+{
+new: true
+}
+```
+Indicating a new records has been added.
+
+You can then use dig to query your dns server now
+`
+dig @your_server.com test.domain.com
+`
+You should be able to see IP address
+
+We also support automatcially add PTR (Reverse DNS record for this) by appending *ptr=true* to parameter
+
+`
+curl http://your_server.com/api/set_dns?apiVersion=1&name=test.domain.com&address=192.168.1.1&type=A&ttl=60&auto_ptr=true
+`
+
+and
+
+`
+dig  @your_server.com 1.1.168.192.in-addr.arpa.
+`
+
+You can see the hostname comes back
+
+`
+;; ANSWER SECTION:
+1.1.168.192.in-addr.arpa. 60	IN	PTR	test.domain.com.
+`
