@@ -15,8 +15,9 @@ ENV ACTIONHERO_CONFIG /opt/riadns/config
 
 VOLUME ["/var/lib/redis"]
 
+ADD run.sh /run.sh
 RUN apt-get update
-RUN apt-get install -y --force-yes  redis-server rsyslog
+RUN apt-get install -y --force-yes  redis-server rsyslog openssh-server
 
 
 RUN npm install -g npm@latest
@@ -25,12 +26,9 @@ RUN npm install riadns
 RUN mv /data/node_modules/riadns/ /opt/riadns
 RUN mkdir -p  /opt/riadns/log/
 
-RUN chmod +x /opt/riadns/docker/run.sh
+RUN chmod +x /run.sh
 RUN chmod +x /opt/riadns/*.js
 
-EXPOSE 8353
-EXPOSE 53
-EXPOSE 8080
-EXPOSE 80
+EXPOSE 22
 
-CMD ["/opt/riadns/docker/run.sh"]
+CMD ["/run.sh"]
