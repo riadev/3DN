@@ -16,7 +16,7 @@ ENV ACTIONHERO_CONFIG /opt/riadns/config
 VOLUME ["/var/lib/redis"]
 
 RUN apt-get update
-RUN apt-get install -y --force-yes  redis-server
+RUN apt-get install -y --force-yes  redis-server rsyslog
 
 
 RUN npm install -g npm@latest
