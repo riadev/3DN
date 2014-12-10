@@ -17,7 +17,7 @@ exports.task = {
         rawConnection: {}
       });
       // params.action should be set
-      task_connection.params = {"apiVersion":"1","ttl":30,"base_domain":process.env.BASE_DOMAIN,"action":"ros_dhcp_sync"};
+      task_connection.params = {"apiVersion":"1","ttl":60,"base_domain":process.env.BASE_DOMAIN,"action":"ros_dhcp_sync"};
       var actionProcessor = new api.actionProcessor({connection: task_connection, callback: function(connection, cont){
         if(connection.error){
           api.log('task error: ' + connection.error, 'error', {params: JSON.stringify(params)});
