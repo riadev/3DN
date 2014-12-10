@@ -2,7 +2,7 @@
   "author": "RIADEV <github@riadev.info>",
   "name": "riadns",
   "description": "A Service discovery based on NODEJS for docker and routeros. it can automatically pull routeros's dhcp lease and assign domain names according to the host name and your base domain configuration, and also support restful api to add dns entry. it can also be configured to pull docker and register docker vms in dns ",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "engines": {
     "node": ">=0.10.0"
   },
