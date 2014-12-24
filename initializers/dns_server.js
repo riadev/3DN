@@ -40,13 +40,24 @@ exports.dns_server = function(api, next){
       }
       var ptr_addr = (ptr_addr_segment.join("."))+".in-addr.arpa";
       return ptr_addr;
-    }
+    },
+
+    bad_dns:["74.125.127.102", "74.125.155.102", "74.125.39.102", "74.125.39.113",
+      "209.85.229.138",
+      "128.121.126.139", "159.106.121.75", "169.132.13.103", "192.67.198.6",
+      "202.106.1.2", "202.181.7.85", "203.161.230.171", "203.98.7.65",
+      "207.12.88.98", "208.56.31.43", "209.145.54.50", "209.220.30.174",
+      "209.36.73.33", "211.94.66.147", "213.169.251.35", "216.221.188.182",
+      "216.234.179.13", "243.185.187.39", "37.61.54.158", "4.36.66.178",
+      "46.82.174.68", "59.24.3.173", "64.33.88.161", "64.33.99.47",
+      "64.66.163.251", "65.104.202.252", "65.160.219.113", "66.45.252.237",
+      "72.14.205.104", "72.14.205.99", "78.16.49.15", "8.7.198.45", "93.46.8.89"]
     
   };
 
   api.dns._start = function(api, next){
     api.log("Staring native dns server .... ");
-    
+    api.log("Using external server","info",process.env.UPSTREAM_DNS||'219.239.26.42');
     var server = dns.createServer();
     server.on('request', function (request, response) {
       api.log("Serving request ","info",request.question[0]);
@@ -66,8 +77,45 @@ exports.dns_server = function(api, next){
               api.log("Error when creating DNS record","error",e)
             }
             response.answer.push(answer);
+            response.send();
+        }else{
+          var question = dns.Question({
+            name: request.question[0].name,
+            type: 'A'
+          });
+
+          var req = dns.Request({
+            question: question,
+            server: { address: process.env.UPSTREAM_DNS||'219.239.26.42', port: 53, type: 'udp' },
+            timeout: 1000
+          });
+
+          req.on('timeout', function () {
+            api.log('Timeout in making request',"info");
+            response.send();
+          });
+          req.on('message', function (err, answer) {
+          var found_bad_addresss=false;
+            answer.answer.forEach(function (a) {
+              if(a.address == null) return;
+              api.dns.bad_dns.forEach(function (b){
+                if(found_bad_addresss || a.address == b){
+                  found_bad_addresss=true;
+                  return
+                }
+              });
+            })
+            if(found_bad_addresss){
+              api.log("bad address returned!","info")
+              return;
+            }
+            response.answer=answer.answer;
+            response.send();
+          });
+
+          req.send();
         }
-      response.send();
+
       })
       
     });
